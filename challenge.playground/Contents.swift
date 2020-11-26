@@ -337,18 +337,36 @@ challenge9b("The quick brown fox jumped over the lazy dog")
 
 func challenge10a(_ text: String) -> (Int, Int) {
     var vowelCount = 0
+    var consonentCount = 0
     let noSpace = text.filter{ $0 != " "}
     let vowels = "aeiou"
-    for char in text.lowercased() {
+    let consonants = "bcdfghjklmnpqrstvwxyz"
+    for char in noSpace.lowercased() {
         if vowels.contains(char) {
             vowelCount += 1
+        } else if consonants.contains(char){
+            consonentCount += 1
         }
     }
-    return (vowelCount, noSpace.count - vowelCount)
+    return (vowelCount, consonentCount)
 }
 
 print(challenge10a("Swift Coding Challenges"))
 print(challenge10a("Mississippi"))
+
+//Challenge 11: Three different letters
+//Difficulty: Tricky
+//Write a function that accepts two strings, and returns true if they are identical in length but
+//have no more than three different letters, taking case and string order into account.
+//Sample input and output
+//• The strings “Clamp” and “Cramp” would return true, because there is one letter difference.
+//• The strings “Clamp” and “Crams” would return true, because there are two letter differences.
+//• The strings “Clamp” and “Grams” would return true, because there are three letter differences.
+//• The strings “Clamp” and “Grans” would return false, because there are four letter differences.
+//• The strings “Clamp” and “Clam” would return false, because they are different lengths.
+//• The strings “clamp” and “maple” should return false. Although they differ by only one
+//letter, the letters that match are in different positions.
+
 
 
 
