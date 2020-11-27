@@ -354,9 +354,84 @@ func challenge10a(_ text: String) -> (Int, Int) {
 print(challenge10a("Swift Coding Challenges"))
 print(challenge10a("Mississippi"))
 
+//Challenge 11: Three different letters
+//Difficulty: Tricky
+//Write a function that accepts two strings, and returns true if they are identical in length but
+//have no more than three different letters, taking case and string order into account.
+//Sample input and output
+//• The strings “Clamp” and “Cramp” would return true, because there is one letter difference.
+//• The strings “Clamp” and “Crams” would return true, because there are two letter differences.
+//• The strings “Clamp” and “Grams” would return true, because there are three letter differences.
+//• The strings “Clamp” and “Grans” would return false, because there are four letter differences.
+//• The strings “Clamp” and “Clam” would return false, because they are different lengths.
+//• The strings “clamp” and “maple” should return false. Although they differ by only one
+//letter, the letters that match are in different positions.
+
+func challenge11a(_ text1: String, _ text2: String) -> Bool {
+    let sortText1 = Array(text1.lowercased())
+    let sortText2 = Array(text2.lowercased())
+    var different = 0
+    guard sortText1.count == sortText2.count else { return false }
+    for (index, char)  in sortText1.enumerated() {
+        if  sortText2[index] != char {
+            different += 1
+            
+            if different == 4 {
+                return false
+            }
+        }
+    }
+    return true
+}
+challenge11a("Clamp", "Grams")
+challenge11a("clamp", "maple")
+challenge11a("Clamp", "Clam")
+challenge11a("Clamp", "Cramp")
+
+//Challenge 12: Find longest prefix
+//Difficulty: Tricky
+//Write a function that accepts a string of words with a similar prefix, separated by spaces, and
+//returns the longest substring that prefixes all words.
+//Sample input and output
+//• The string “swift switch swill swim” should return “swi”.
+//• The string “flip flap flop” should return “fl”.
+
+func challenge12a(_ text: String) -> String  {
+    let trimText = text.trimmingCharacters(in: .whitespaces).components(separatedBy: " ")
+    let array = trimText.filter {
+        $0 != ""
+    }
+    var temp = ""
+    var best = ""
+
+    guard let first = array.first else { return "" }
+
+    for char in first {
+        temp.append(char)
+
+        for word in array {
+            if !word.hasPrefix(temp) {
+                return best
+            }
+        }
+        best = temp
+
+    }
+    return best
+    
+}
+
+challenge12a("swift switch swill swim")
+challenge12a("flip flap flop  ")
 
 
 
-
-
-
+//Challenge 13: Run-length encoding
+//Difficulty: Taxing
+//Write a function that accepts a string as input, then returns how often each letter is repeated in
+//a single run, taking case into account.
+//Tip: This approach is used in a simple lossless compression technique called run-length encoding.
+//Sample input and output
+//• The string “aabbcc” should return “a2b2c2”.
+//• The strings “aaabaaabaaa” should return “a3b1a3b1a3”
+//• The string “aaAAaa” should return “a2A2a2”
