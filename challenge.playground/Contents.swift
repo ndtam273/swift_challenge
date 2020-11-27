@@ -337,18 +337,24 @@ challenge9b("The quick brown fox jumped over the lazy dog")
 
 func challenge10a(_ text: String) -> (Int, Int) {
     var vowelCount = 0
+    var consonentCount = 0
     let noSpace = text.filter{ $0 != " "}
     let vowels = "aeiou"
-    for char in text.lowercased() {
+    let consonants = "bcdfghjklmnpqrstvwxyz"
+    for char in noSpace.lowercased() {
         if vowels.contains(char) {
             vowelCount += 1
+        } else if consonants.contains(char){
+            consonentCount += 1
         }
     }
-    return (vowelCount, noSpace.count - vowelCount)
+    return (vowelCount, consonentCount)
 }
 
 print(challenge10a("Swift Coding Challenges"))
 print(challenge10a("Mississippi"))
+
+
 
 
 
